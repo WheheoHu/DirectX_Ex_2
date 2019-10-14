@@ -56,7 +56,7 @@ private:
 class Cube_Index : public D3DObject
 {
 public:
-	Cube_Index ();
+	Cube_Index();
 	~Cube_Index();
 	bool		CreateBuffer(IDirect3DDevice9* _device);
 	//bool        CreateBuffer(IDirect3DDevice9* _device, int _width, int _height, float _resolution);

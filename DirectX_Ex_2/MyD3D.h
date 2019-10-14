@@ -30,7 +30,7 @@ public:
 	void Release();
 
 	IDirect3DDevice9*  getDevice();
-	
+
 protected:
 
 
@@ -40,7 +40,7 @@ private:
 	int					d_width;
 	int					d_height;
 
-
+	Cube_Index          d3d_cube;
 	Square_Index        d3d_square;
 	Plane_Index         d3d_plane;
 };

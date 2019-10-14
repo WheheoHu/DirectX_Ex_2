@@ -73,12 +73,32 @@ bool MyD3D::Initialize()
 	d3d_plane.CreateBuffer(p_Device, 15, 15, 0.3);
 	d3d_plane.SetTranslation(D3DXVECTOR3(0.0f, 0.0f,0));
 
+
+	d3d_cube.CreateBuffer(p_Device);
+	d3d_cube.SetTranslation(D3DXVECTOR3(0.0f, 0.0f, -1));
+
 	return true;
 }
 
 void MyD3D::FrameMove(float timeDelta)
 {
 	
+	
+
+	static D3DXVECTOR3 _v_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	if (_v_rot.x > D3DX_PI * 2)
+	{
+		_v_rot.x = 0.0f;
+	}
+	if (_v_rot.y > D3DX_PI * 2)
+	{
+		_v_rot.y = 0.0f;
+	}
+	d3d_cube.SetRotation(_v_rot);
+
+	_v_rot.x += 0.5f * timeDelta;
+	_v_rot.y += 0.5f * timeDelta;
+
 }
 
 bool MyD3D::Render()
@@ -93,6 +113,7 @@ bool MyD3D::Render()
         //drawing 
 
 		//d3d_square.Render(p_Device);
+		d3d_cube.Render(p_Device);
 		d3d_plane.Render(p_Device);
 
 		p_Device->EndScene();
