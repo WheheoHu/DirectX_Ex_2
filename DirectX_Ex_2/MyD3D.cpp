@@ -13,12 +13,12 @@
 
 #include "MyD3D.h"
 
-MyD3D::MyD3D() 
+MyD3D::MyD3D()
 {
-	
+
 }
 
-MyD3D::~MyD3D() 
+MyD3D::~MyD3D()
 {
 
 }
@@ -29,12 +29,12 @@ bool MyD3D::CreateDevice(HINSTANCE hInstance, int _width, int _height)
 	d_width = _width;
 	d_height = _height;
 
-	if(!InitWindow(hInstance, _width, _height,  true))
+	if (!InitWindow(hInstance, _width, _height, true))
 	{
 		MessageBox(0, "InitD3D() - FAILED", 0, 0);
 		return 0;
 	}
-	if(!InitD3D(hInstance, _width, _height,  true, D3DDEVTYPE_HAL, &p_Device))
+	if (!InitD3D(hInstance, _width, _height, true, D3DDEVTYPE_HAL, &p_Device))
 	{
 		MessageBox(0, "InitD3D() - FAILED", 0, 0);
 		return 0;
@@ -55,23 +55,23 @@ bool MyD3D::Initialize()
 	p_Device->SetTransform(D3DTS_VIEW, &V);
 
 	// Set projection matrix.
-	
+
 	D3DXMATRIX proj;
 	D3DXMatrixPerspectiveFovLH(
-			&proj,
-			D3DX_PI * 0.5f, // 90 - degree
-			(float)d_width / (float)d_height,
-			1.0f,
-			1000.0f);
+		&proj,
+		D3DX_PI * 0.5f, // 90 - degree
+		(float)d_width / (float)d_height,
+		1.0f,
+		1000.0f);
 	p_Device->SetTransform(D3DTS_PROJECTION, &proj);
 
 
 	//create objects
 	d3d_square.CreateBuffer(p_Device);
-	d3d_square.SetTranslation(D3DXVECTOR3(-1.5f, 0.0f,0));
+	d3d_square.SetTranslation(D3DXVECTOR3(-1.5f, 0.0f, 0));
 
 	d3d_plane.CreateBuffer(p_Device, 15, 15, 0.3);
-	d3d_plane.SetTranslation(D3DXVECTOR3(0.0f, 0.0f,0));
+	d3d_plane.SetTranslation(D3DXVECTOR3(0.0f, 0.0f, 0));
 
 
 	d3d_cube.CreateBuffer(p_Device);
@@ -82,35 +82,41 @@ bool MyD3D::Initialize()
 
 void MyD3D::FrameMove(float timeDelta)
 {
-	
-	
-
-	static D3DXVECTOR3 _v_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	if (_v_rot.x > D3DX_PI * 2)
+	if (GetAsyncKeyState(VK_UP) & 0x8000f)
 	{
-		_v_rot.x = 0.0f;
+		d3d_cube.v_Translate += D3DXVECTOR3(0.0f, 1.0f * timeDelta, 0.0f);
+		d3d_cube.SetTranslation(d3d_cube.v_Translate);
 	}
-	if (_v_rot.y > D3DX_PI * 2)
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000f)
 	{
-		_v_rot.y = 0.0f;
+		d3d_cube.v_Translate -= D3DXVECTOR3(0.0f, 1.0f * timeDelta, 0.0f);
+		d3d_cube.SetTranslation(d3d_cube.v_Translate);
 	}
-	d3d_cube.SetRotation(_v_rot);
 
-	_v_rot.x += 0.5f * timeDelta;
-	_v_rot.y += 0.5f * timeDelta;
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000f)
+	{
+		d3d_cube.v_Translate -= D3DXVECTOR3(1.0f * timeDelta, 0.0f, 0.0f);
+		d3d_cube.SetTranslation(d3d_cube.v_Translate);
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000f)
+	{
+		d3d_cube.v_Translate += D3DXVECTOR3(1.0f * timeDelta, 0.0f, 0.0f);
+		d3d_cube.SetTranslation(d3d_cube.v_Translate);
+	}
+	
 
 }
 
 bool MyD3D::Render()
 {
-	if( p_Device ) 
+	if (p_Device)
 	{
 		// Set back buffer - 0xffffffff (white)
 		//Set each pixel on the depth buffer to a value of 1.0.
 		p_Device->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1.0f, 0);
 
 		p_Device->BeginScene();
-        //drawing 
+		//drawing 
 
 		//d3d_square.Render(p_Device);
 		d3d_cube.Render(p_Device);

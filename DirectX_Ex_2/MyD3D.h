@@ -16,6 +16,7 @@
 #include "D3DUT.h"
 #include "D3DObject.h"
 #include "Object_Index.h"
+#include <conio.h>
 
 class MyD3D
 {
