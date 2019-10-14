@@ -13,5 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{8a539e6e-3cda-4ac1-b41e-abe263de51bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\D3D">
+      <UniqueIdentifier>{2399d238-a412-4ead-8894-050dbdc71331}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainApp.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DObject.cpp">
+      <Filter>Source Files\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DUT.cpp">
+      <Filter>Source Files\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="MyD3D.cpp">
+      <Filter>Source Files\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Object_Index.cpp">
+      <Filter>Source Files\D3D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D3DObject.h">
+      <Filter>Source Files\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DUT.h">
+      <Filter>Source Files\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="MyD3D.h">
+      <Filter>Source Files\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Object_Index.h">
+      <Filter>Source Files\D3D</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
